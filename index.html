@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Español Profesional · Lucas · Lourvix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+       
+        :root {
+            --copper: #B7794A;
+            --copper-hi: #D89A6A;
+            --copper-lo: #8E5A33;
+            --brown: #6B4423;
+            --brown-dark: #4A2C1E;
+            --obsidian: #2A1810;
+            --obsidian-2: #3A2518;
+            --off: #F5F1E8;
+            --off-2: #EBE4D5;
+            --off-3: #E0D7C2;
+            --ivory: #FAF7F0;
+            --od: #FFB000;
+            --oi: #FF7A00;
+            --rx: #D1495B;
+            --pp: #8C1D40;
+            --success: #5C8A52;
+            --success-bg: rgba(92, 138, 82, .12);
+            --danger: #B44A3A;
+            --danger-bg: rgba(180, 74, 58, .12);
+            --text: #2A1810;
+            --text-mute: #7A6250;
+            --text-ivory: #F5F1E8;
+            --text-ivory-m: rgba(245, 241, 232, .68);
+            --line: rgba(107, 68, 35, .18);
+            --line-2: rgba(107, 68, 35, .09);
+            --ff-display: 'Montserrat', system-ui, sans-serif;
+            --ff-text: 'Inter', system-ui, -apple-system, sans-serif;
+            --shadow-sm: 0 2px 12px rgba(107, 68, 35, .08);
+            --shadow-md: 0 12px 32px rgba(107, 68, 35, .12);
+            --shadow-lg: 0 24px 60px rgba(107, 68, 35, .18);
+            --shadow-copper: 0 16px 40px rgba(183, 121, 74, .30);
+            --radius: 18px;
+            --radius-lg: 26px;
+            --max: 1240px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            margin: 0;
+            font-family: var(--ff-text);
+            font-size: 16px;
+            line-height: 1.65;
+            color: var(--text);
+            background: var(--off);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4 { font-family: var(--ff-display); font-weight: 800; letter-spacing: -.015em; margin: 0; }
+        button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+        input { font-family: inherit; }
+        .container { max-width: var(--max); margin-inline: auto; padding-inline: 24px; }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(183, 121, 74, .1);
+            border: 1px solid rgba(183, 121, 74, .25);
+            color: var(--copper-lo);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: .72rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .section-label .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--copper-hi);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(.8); }
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+        .section-header h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            color: var(--brown-dark);
+            margin-bottom: 12px;
+        }
+        .section-header p {
+            color: var(--text-mute);
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        .critica {
+            background: var(--obsidian);
+            color: var(--text-ivory);
+            position: relative;
+            overflow: hidden;
+            padding: clamp(80px, 12vw, 140px) 0;
+        }
+        .critica::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(245, 241, 232, .02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(245, 241, 232, .02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000, transparent 80%);
+            pointer-events: none;
+        }
+        .critica-inner { position: relative; z-index: 1; }
+        .critica .section-label {
+            background: rgba(183, 121, 74, .15);
+            border-color: rgba(183, 121, 74, .35);
+            color: var(--copper-hi);
+        }
+        .critica h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            color: var(--ivory);
+            margin-bottom: 16px;
+        }
+        .critica .subtitle {
+            color: var(--text-ivory-m);
+            font-size: clamp(.95rem, 1.5vw, 1.1rem);
+            max-width: 720px;
+            margin-bottom: 48px;
+        }
+        .critica-scenario {
+            background: rgba(245, 241, 232, .04);
+            border: 1px solid rgba(245, 241, 232, .08);
+            border-radius: var(--radius-lg);
+            padding: clamp(28px, 4vw, 44px);
+            margin-bottom: 48px;
+        }
+        .critica-scenario p {
+            margin: 0 0 18px;
+            font-size: 1.02rem;
+            color: rgba(245, 241, 232, .85);
+            line-height: 1.75;
+        }
+        .critica-scenario p:last-child { margin-bottom: 0; }
+        .critica-scenario strong { color: var(--copper-hi); }
+        .critica-scenario .quote {
+            border-left: 3px solid var(--copper);
+            padding-left: 20px;
+            margin: 24px 0;
+            font-style: italic;
+            color: var(--text-ivory-m);
+        }
+        .critica-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .critica-option {
+            background: rgba(245, 241, 232, .05);
+            border: 1px solid rgba(245, 241, 232, .12);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            cursor: pointer;
+            transition: all .3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .critica-option:hover {
+            background: rgba(245, 241, 232, .08);
+            border-color: var(--copper);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,.3);
+        }
+        .critica-option.selected {
+            border-color: var(--copper-hi);
+            background: rgba(183, 121, 74, .12);
+        }
+        .critica-option .option-tag {
+            display: inline-block;
+            background: var(--copper);
+            color: var(--obsidian);
+            font-family: var(--ff-display);
+            font-weight: 800;
+            font-size: .75rem;
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            letter-spacing: .06em;
+        }
+        .critica-option h3 {
+            font-size: 1.1rem;
+            color: var(--ivory);
+            margin-bottom: 10px;
+        }
+        .critica-option p {
+            font-size: .9rem;
+            color: var(--text-ivory-m);
+            margin: 0;
+            line-height: 1.6;
+        }
+        .critica-option .option-feedback {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(245, 241, 232, .1);
+            font-size: .88rem;
+            display: none;
+            color: var(--copper-hi);
+            font-weight: 500;
+        }
+        .critica-option.selected .option-feedback { display: block; }
+
+        .quiz {
+            background: linear-gradient(180deg, var(--off) 0%, var(--off-2) 100%);
+            padding: clamp(60px, 10vw, 120px) 0;
+        }
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);   /* 3 colunas no desktop */
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: stretch;
+        }
+        .quiz-card {
+            background: var(--ivory);
+            border: 1px solid var(--line-2);
+            border-radius: var(--radius-lg);
+            padding: 28px 26px;
+            box-shadow: var(--shadow-sm);
+            transition: all .3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .quiz-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+        .quiz-card .quiz-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            background: var(--copper);
+            color: var(--ivory);
+            font-family: var(--ff-display);
+            font-weight: 800;
+            font-size: .85rem;
+            border-radius: 50%;
+            margin-bottom: 16px;
+        }
+        .quiz-card .quiz-tag {
+            display: inline-block;
+            background: rgba(183, 121, 74, .1);
+            color: var(--copper-lo);
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            width: fit-content;
+        }
+        .quiz-card .quiz-question {
+            font-family: var(--ff-display);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--brown-dark);
+            margin-bottom: 20px;
+            line-height: 1.45;
+        }
+        .quiz-card .quiz-question em {
+            color: var(--copper-lo);
+            font-style: normal;
+            background: rgba(183, 121, 74, .12);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: auto;
+        }
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: var(--off);
+            border: 1.5px solid var(--line-2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all .2s ease;
+            font-size: .88rem;
+            color: var(--text);
+            text-align: left;
+            line-height: 1.4;
+            width: 100%;
+        }
+        .quiz-option:hover:not(.disabled) {
+            border-color: var(--copper);
+            background: rgba(183, 121, 74, .06);
+            transform: translateX(3px);
+        }
+        .quiz-option .letter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            border-radius: 50%;
+            background: var(--off-3);
+            color: var(--brown);
+            font-family: var(--ff-display);
+            font-weight: 800;
+            font-size: .72rem;
+            transition: all .2s ease;
+        }
+        .quiz-option.selected {
+            border-color: var(--copper);
+            background: rgba(183, 121, 74, .1);
+        }
+        .quiz-option.selected .letter {
+            background: var(--copper);
+            color: var(--ivory);
+        }
+        .quiz-option.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+        .quiz-option.correct .letter {
+            background: var(--success);
+            color: var(--ivory);
+        }
+        .quiz-option.incorrect {
+            background: var(--danger-bg);
+            border-color: var(--danger);
+            color: var(--danger);
+            font-weight: 600;
+        }
+        .quiz-option.incorrect .letter {
+            background: var(--danger);
+            color: var(--ivory);
+        }
+        .quiz-option.disabled {
+            cursor: not-allowed;
+            opacity: .9;
+        }
+        .quiz-feedback {
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: .84rem;
+            line-height: 1.5;
+            display: none;
+            animation: slideIn .3s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.ok {
+            background: var(--success-bg);
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+        .quiz-feedback.no {
+            background: var(--danger-bg);
+            color: var(--danger);
+            border-left: 4px solid var(--danger);
+        }
+        .quiz-feedback strong { font-weight: 700; }
+
+        .quiz-actions, .dialogos-actions {
+            text-align: center;
+            margin-top: 48px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            font-family: var(--ff-display);
+            font-weight: 700;
+            font-size: .9rem;
+            padding: 14px 32px;
+            border-radius: 100px;
+            transition: all .25s ease;
+            letter-spacing: .02em;
+        }
+        .btn-primary {
+            background: var(--copper);
+            color: var(--ivory);
+            box-shadow: var(--shadow-copper);
+        }
+        .btn-primary:hover {
+            background: var(--copper-hi);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 48px rgba(183, 121, 74, .4);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--copper-lo);
+            border: 2px solid var(--copper);
+        }
+        .btn-ghost:hover {
+            background: rgba(183, 121, 74, .08);
+            transform: translateY(-2px);
+        }
+        .quiz-score, .score-display {
+            text-align: center;
+            margin-top: 24px;
+            font-family: var(--ff-display);
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--brown);
+            min-height: 30px;
+        }
+        .quiz-score .pct {
+            color: var(--copper);
+            font-size: 1.4rem;
+        }
+
+        /* ============================================
+           20 DIÁLOGOS (Sección Clara)
+           ============================================ */
+        .dialogos {
+            background: var(--off);
+            padding: clamp(60px, 10vw, 120px) 0;
+        }
+        .dialogos-list {
+            display: grid;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .dialogo-card {
+            background: var(--ivory);
+            border: 1px solid var(--line-2);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow .2s ease;
+        }
+        .dialogo-card:hover { box-shadow: var(--shadow-md); }
+        .dialogo-card .dialogo-num {
+            display: inline-block;
+            font-family: var(--ff-display);
+            font-weight: 800;
+            font-size: .75rem;
+            color: var(--copper);
+            background: rgba(183, 121, 74, .1);
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+        .dialogo-line {
+            margin-bottom: 10px;
+            font-size: .95rem;
+            line-height: 1.7;
+        }
+        .dialogo-line:last-child { margin-bottom: 0; }
+        .dialogo-line .speaker { font-weight: 600; color: var(--brown); }
+        .dialogo-line .speaker.jefe { color: var(--pp); }
+        .dialogo-line .speaker.gerente { color: var(--copper-lo); }
+        .blank {
+            display: inline-block;
+            min-width: 120px;
+            border: none;
+            border-bottom: 2px solid var(--copper);
+            background: transparent;
+            font-family: inherit;
+            font-size: inherit;
+            color: var(--brown-dark);
+            text-align: center;
+            padding: 2px 4px;
+            margin: 0 4px;
+            transition: all .2s ease;
+            outline: none;
+        }
+        .blank:focus {
+            border-bottom-color: var(--od);
+            background: rgba(255, 176, 0, .06);
+        }
+        .blank.correct {
+            border-bottom-color: var(--success);
+            color: var(--success);
+            background: var(--success-bg);
+            font-weight: 600;
+        }
+        .blank.incorrect {
+            border-bottom-color: var(--danger);
+            color: var(--danger);
+            background: var(--danger-bg);
+            font-weight: 600;
+        }
+        .blank::placeholder {
+            color: rgba(107, 68, 35, .3);
+            font-style: italic;
+            font-size: .85em;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .quiz-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 680px) {
+            .critica-options { grid-template-columns: 1fr; }
+            .quiz-grid { grid-template-columns: 1fr; }
+            .dialogo-card { padding: 20px; }
+            .blank { min-width: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+
+<section class="critica" id="critica">
+    <div class="container critica-inner">
+        <span class="section-label"><span class="dot"></span>  · Atención Crítica</span>
+        <h2>Situación hipotética: tu cerebro en tensión real</h2>
+        <p class="subtitle">Un escenario que bien podría ser tu martes. Léelo despacio. Después, decide.</p>
+
+        <div class="critica-scenario">
+            <p><strong>Martes, 08:45 AM.</strong> Miras la pantalla de tu laptop mientras le das el primer sorbo a un café que ya se está enfriando. Como Gerente de Proyecto de TI, sabes que hoy es el día del despliegue crítico de la nueva plataforma e-commerce de la empresa. Tienes a tu cargo un equipo multidisciplinar, brillante pero al límite, repartido en cuatro zonas horarias diferentes.</p>
+            <p>El chat corporativo empieza a parpadear sin tregua. La tensión se siente en el aire, incluso a través de la pantalla.</p>
+            <div class="quote">
+                <p><strong>09:00 AM – La chispa:</strong> El diseñador UI/UX (chileno) te manda un mensaje urgente. El desarrollador web (panameño) implementó un cambio de último minuto en la pasarela de pagos que rompe por completo la experiencia de usuario en dispositivos móviles. <em>"Po, quedó la escoba, la interfaz se desconfiguró entera en iOS"</em>, te escribe el chileno. El desarrollador responde que tuvo que hacerlo porque el código original ralentizaba la carga del carrito.</p>
+                <p><strong>09:15 AM – El fuego:</strong> El analista de ciberseguridad (mexicano) entra en la conversación con una alerta roja: la modificación del desarrollador abrió una vulnerabilidad en la validación de tokens de la API. <em>"¡Híjole! Si dejamos eso así, nos van a meter un golazo. Hay riesgo de inyección de código. No podemos salir a producción hoy"</em>.</p>
+                <p><strong>09:30 AM – La presión desde arriba:</strong> Tu jefe (argentino), el Director de Operaciones, te llama directamente al móvil. Faltan solo horas para el lanzamiento oficial frente a los inversionistas. <em>"Escuchame una cosa, che. No me importa lo que tengan que hacer, pero esto hoy sale o sale. La competencia ya lanzó su versión y no podemos quedar atrás. Confiá en tu equipo y resolvelo ya"</em>.</p>
+                <p><strong>09:45 AM – El laberinto de datos:</strong> Mientras intentas calmar las aguas, la científica de datos (chilena) te advierte que los algoritmos de recomendación están arrojando sesgos extraños debido al último parche de código. Si lanzan la plataforma así, las recomendaciones personalizadas serán un desastre, afectando las proyecciones de ventas del primer día.</p>
+                <p><strong>10:00 AM – El muro de contención:</strong> El equipo de QA / Testeadores (mexicanos y panameños) se niega a firmar la aprobación de la entrega. El ambiente en la llamada de Teams es denso; se culpan unos a otros por la falta de comunicación en los cambios de arquitectura.</p>
+            </div>
+            <p>El reloj sigue avanzando. El lanzamiento está programado para las <strong>03:00 PM</strong>. Tu cerebro procesa las variables a toda velocidad: la seguridad del sistema, la experiencia del usuario, la precisión de los datos, la presión de tu jefe y el agotamiento de tu equipo.</p>
+        </div>
+
+        <h3 style="color: var(--ivory); font-size: 1.3rem; margin-bottom: 24px;">🧠 Tu decisión</h3>
+        <div class="critica-options" id="optionsContainer">
+            <div class="critica-option" data-option="A" onclick="selectOption(this)">
+                <span class="option-tag">Opción A</span>
+                <h3>Mitigación inmediata</h3>
+                <p>Decides posponer el lanzamiento 48 horas para corregir la vulnerabilidad y el diseño UI/UX, asumiendo el costo político y el enojo de tu jefe argentino para proteger la seguridad del producto.</p>
+                <div class="option-feedback">✅ Decisión responsable. La seguridad y la calidad del producto son prioritarias. Comunicarás al jefe con datos y un plan de acción claro.</div>
+            </div>
+            <div class="critica-option" data-option="B" onclick="selectOption(this)">
+                <span class="option-tag">Opción B</span>
+                <h3>Lanzamiento por fases</h3>
+                <p>Convences a tu jefe de lanzar hoy la plataforma solo para web de escritorio (donde la UI funciona) y deshabilitas temporalmente el motor de recomendaciones defectuoso, prometiendo un parche de ciberseguridad en la madrugada.</p>
+                <div class="option-feedback">⚖️ Decisión equilibrada. Entregas valor parcial, reduces riesgos y mantienes la presión del lanzamiento bajo control. Requiere comunicación constante con el equipo.</div>
+            </div>
+            <div class="critica-option" data-option="C" onclick="selectOption(this)">
+                <span class="option-tag">Opción C</span>
+                <h3>Guerra relámpago / Hackathon</h3>
+                <p>Reúnes a todo el equipo en una sesión de emergencia de 3 horas. Ordenas hacer un rollback (volver atrás) a la versión estable anterior y exiges a QA y Desarrollo trabajar en paralelo para corregir solo el fallo crítico de seguridad antes de las 03:00 PM.</p>
+                <div class="option-feedback">🔥 Decisión de alto riesgo. La presión puede llevar a errores. Pero si el equipo está alineado y motivado, podría funcionar. Requiere liderazgo firme y comunicación clara.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     6 CARDS DE OPCIÓN MÚLTIPLE (LINHA DE 3)
+     ============================================ -->
+<section class="quiz" id="quiz">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label"><span class="dot"></span> Práctica Rápida</span>
+            <h2>6 Situaciones del Día a Día</h2>
+            <p>Elige la opción correcta para cada situación profesional. Recibirás feedback inmediato en verde (correcto) o rojo (incorrecto).</p>
+        </div>
+
+        <div class="quiz-grid" id="quizGrid"></div>
+
+        <div class="quiz-actions">
+            <button class="btn btn-primary" onclick="checkQuiz()">✅ Verificar Todo</button>
+            <button class="btn btn-ghost" onclick="resetQuiz()">🔄 Reiniciar</button>
+        </div>
+        <div class="quiz-score" id="quizScore"></div>
+    </div>
+</section>
+
+<!-- ============================================
+     20 DIÁLOGOS · LACUNAS
+     ============================================ -->
+<section class="dialogos" id="dialogos">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">✏️ Práctica de Vocabulario</span>
+            <h2>20 Diálogos con tu Jefe Argentino</h2>
+            <p>Completa las lagunas con el vocabulario clave de gestión de proyectos, desarrollo y términos típicos del español rioplatense.</p>
+        </div>
+
+        <div class="dialogos-list" id="dialogosList"></div>
+
+        <div class="dialogos-actions">
+            <button class="btn btn-primary" onclick="checkAllAnswers()">✅ Verificar Respuestas</button>
+            <button class="btn btn-ghost" onclick="resetAllAnswers()">🔄 Reiniciar</button>
+        </div>
+        <div class="score-display" id="scoreDisplay"></div>
+    </div>
+</section>
+
+<script>
+    // ============================================
+    // 07 · ATENCIÓN CRÍTICA - Interactividad
+    // ============================================
+    function selectOption(el) {
+        document.querySelectorAll('.critica-option').forEach(opt => opt.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+
+    // ============================================
+    // 6 CARDS DE QUIZ - Datos
+    // ============================================
+    const quizData = [
+        {
+            tag: 'Falsos Cognatos',
+            question: 'Tu jefe argentino te pide que le envíes el <em>informe</em> del sprint. ¿Cuál es la forma correcta en español?',
+            options: [
+                { text: 'Voy a mandarte el <strong>relatorio</strong> del sprint.', correct: false },
+                { text: 'Voy a mandarte el <strong>informe</strong> del sprint.', correct: true },
+                { text: 'Voy a mandarte la <strong>relatoria</strong> del sprint.', correct: false }
+            ],
+            feedbackOk: '¡Correcto! En español se dice <strong>informe</strong>. "Relatorio" es un falso cognato del portugués "relatório".',
+            feedbackNo: 'Incorrecto. En español se dice <strong>informe</strong>. "Relatorio" no existe con ese significado; se usa "informe" o "reporte".'
+        },
+        {
+            tag: 'Voseo Argentino',
+            question: 'Tu jefe te dice: <em>"Che, ¿podés revisar esto hoy?"</em>. ¿Cómo respondes usando el mismo registro?',
+            options: [
+                { text: 'Sí, <strong>tú</strong> puedes contar conmigo.', correct: false },
+                { text: 'Sí, <strong>vos</strong> podés contar conmigo.', correct: true },
+                { text: 'Sí, <strong>usted</strong> puede contar conmigo.', correct: false }
+            ],
+            feedbackOk: '¡Correcto! En Argentina se usa el <strong>voseo</strong>: "vos podés", "vos tenés", "vos sabés".',
+            feedbackNo: 'Incorrecto. Tu jefe argentino usa voseo. Lo adecuado es responder con <strong>"vos podés"</strong> para mantener el registro.'
+        },
+        {
+            tag: 'Vocabulario Tech',
+            question: 'Necesitas reportar un error crítico en la pasarela de pagos. ¿Cuál es la palabra correcta en español?',
+            options: [
+                { text: 'Encontré un <strong>bug</strong> crítico en la pasarela.', correct: true },
+                { text: 'Encontré un <strong>error</strong> crítico en la pasarela.', correct: true },
+                { text: 'Encontré una <strong>falla</strong> crítica en la pasarela.', correct: true }
+            ],
+            feedbackOk: '¡Excelente! Las tres son válidas en el mundo tech: <strong>bug</strong>, <strong>error</strong> y <strong>falla</strong>.',
+            feedbackNo: 'En realidad, las tres opciones son aceptadas. <strong>Bug</strong>, <strong>error</strong> y <strong>falla</strong> son válidas.'
+        },
+        {
+            tag: 'Comunicación con el Jefe',
+            question: 'Tu jefe te pide algo urgente. ¿Cuál es la forma más natural y profesional de confirmar?',
+            options: [
+                { text: '<strong>Dale, ya mismo lo veo.</strong>', correct: true },
+                { text: '<strong>Ok, lo haré.</strong>', correct: false },
+                { text: '<strong>Sí, señor.</strong>', correct: false }
+            ],
+            feedbackOk: '¡Muy bien! <strong>"Dale, ya mismo lo veo"</strong> es natural, directo y profesional en el registro rioplatense.',
+            feedbackNo: 'Incorrecto. Lo más natural con un jefe argentino es <strong>"Dale, ya mismo lo veo"</strong>. "Sí, señor" suena demasiado formal.'
+        },
+        {
+            tag: 'QA y Testing',
+            question: 'El equipo de QA mexicano te pregunta: <em>"¿Ya está listo para el test de regresión?"</em>. ¿Qué respondes?',
+            options: [
+                { text: 'Sí, ya <strong>pasó</strong> el test de regresión.', correct: true },
+                { text: 'Sí, ya <strong>aprobó</strong> el test de regresión.', correct: false },
+                { text: 'Sí, ya <strong>realizó</strong> el test de regresión.', correct: false }
+            ],
+            feedbackOk: '¡Correcto! <strong>"Ya pasó el test"</strong> es la forma más natural de decir que se superó la prueba.',
+            feedbackNo: 'Incorrecto. Lo natural es <strong>"ya pasó el test de regresión"</strong>. "Aprobó" y "realizó" no encajan bien aquí.'
+        },
+        {
+            tag: 'Reuniones Globales',
+            question: 'En una reunión global, quieres intervenir para dar tu opinión. ¿Qué frase usas?',
+            options: [
+                { text: '<strong>Perdón, ¿puedo hablar?</strong>', correct: false },
+                { text: '<strong>Disculpá, si me permitís un segundo...</strong>', correct: true },
+                { text: '<strong>Oye, una cosa...</strong>', correct: false }
+            ],
+            feedbackOk: '¡Perfecto! <strong>"Disculpá, si me permitís un segundo..."</strong> es educado, natural y funciona en contextos multiculturales.',
+            feedbackNo: 'Incorrecto. La opción más adecuada es <strong>"Disculpá, si me permitís un segundo..."</strong>.'
+        }
+    ];
+
+    let quizState = quizData.map(() => ({ selected: null, checked: false }));
+
+    function renderQuiz() {
+        const grid = document.getElementById('quizGrid');
+        let html = '';
+        quizData.forEach((card, idx) => {
+            html += `<div class="quiz-card" data-index="${idx}">`;
+            html += `<div class="quiz-num">${idx + 1}</div>`;
+            html += `<span class="quiz-tag">${card.tag}</span>`;
+            html += `<div class="quiz-question">${card.question}</div>`;
+            html += `<div class="quiz-options">`;
+            card.options.forEach((opt, oi) => {
+                const letter = String.fromCharCode(65 + oi);
+                html += `<button class="quiz-option" data-card="${idx}" data-opt="${oi}" onclick="selectQuizOption(${idx}, ${oi})">`;
+                html += `<span class="letter">${letter}</span>`;
+                html += `<span>${opt.text}</span>`;
+                html += `</button>`;
+            });
+            html += `</div>`;
+            html += `<div class="quiz-feedback" id="quizFeedback${idx}"></div>`;
+            html += `</div>`;
+        });
+        grid.innerHTML = html;
+    }
+
+    function selectQuizOption(cardIdx, optIdx) {
+        const state = quizState[cardIdx];
+        if (state.checked) return;
+        state.selected = optIdx;
+
+        const card = document.querySelector(`.quiz-card[data-index="${cardIdx}"]`);
+        card.querySelectorAll('.quiz-option').forEach((btn, i) => {
+            btn.classList.toggle('selected', i === optIdx);
+        });
+    }
+
+    function checkQuiz() {
+        let correct = 0;
+        quizData.forEach((card, idx) => {
+            const state = quizState[idx];
+            if (state.selected === null) return;
+            state.checked = true;
+            const selectedIdx = state.selected;
+            const isCorrect = card.options[selectedIdx].correct;
+
+            const cardEl = document.querySelector(`.quiz-card[data-index="${idx}"]`);
+            const buttons = cardEl.querySelectorAll('.quiz-option');
+
+            buttons.forEach((btn, i) => {
+                btn.classList.add('disabled');
+                btn.classList.remove('selected');
+                if (i === selectedIdx) {
+                    btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+                if (!isCorrect && card.options[i].correct) {
+                    btn.classList.add('correct');
+                }
+            });
+
+            const fb = document.getElementById(`quizFeedback${idx}`);
+            fb.className = 'quiz-feedback show ' + (isCorrect ? 'ok' : 'no');
+            fb.innerHTML = isCorrect ? `✅ ${card.feedbackOk}` : `❌ ${card.feedbackNo}`;
+
+            if (isCorrect) correct++;
+        });
+
+        const total = quizData.length;
+        const answered = quizState.filter(s => s.selected !== null).length;
+        if (answered === 0) {
+            document.getElementById('quizScore').textContent = '⚠️ Selecciona al menos una opción antes de verificar.';
+            return;
+        }
+        const pct = Math.round((correct / total) * 100);
+        const scoreEl = document.getElementById('quizScore');
+        scoreEl.innerHTML = `Acertaste <span class="pct">${correct}/${total}</span> (${pct}%)`;
+        scoreEl.style.color = correct === total ? 'var(--success)' : (correct >= total * 0.6 ? 'var(--brown)' : 'var(--danger)');
+    }
+
+    function resetQuiz() {
+        quizState = quizData.map(() => ({ selected: null, checked: false }));
+        document.querySelectorAll('.quiz-card').forEach(cardEl => {
+            cardEl.querySelectorAll('.quiz-option').forEach(btn => {
+                btn.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+            });
+            const idx = cardEl.dataset.index;
+            const fb = document.getElementById(`quizFeedback${idx}`);
+            if (fb) { fb.className = 'quiz-feedback'; fb.innerHTML = ''; }
+        });
+        document.getElementById('quizScore').textContent = '';
+    }
+
+    // ============================================
+    // 20 DIÁLOGOS - Datos y Renderizado
+    // ============================================
+    const dialogos = [
+        { num: 1, lines: [
+            { speaker: 'Jefe', text: 'Che, ¿cómo viene el ______ de entrega de la nueva funcionalidad de la app?', blank: 'plazo' },
+            { speaker: 'Gerente', text: 'Venimos bien, jefe. El equipo de ______ ya terminó los prototipos y están alineados con el negocio.', blank: 'diseño' }
+        ]},
+        { num: 2, lines: [
+            { speaker: 'Jefe', text: 'Necesito que revisemos la ______ a largo plazo para el lanzamiento en la nube.', blank: 'estrategia' },
+            { speaker: 'Gerente', text: 'Perfecto. Mañana en la ______ semanal les presento la hoja de ruta actualizada.', blank: 'reunión' }
+        ]},
+        { num: 3, lines: [
+            { speaker: 'Jefe', text: '¿Cómo están las ______ de rendimiento del último sprint?', blank: 'métricas' },
+            { speaker: 'Gerente', text: 'Muy bien, el equipo aumentó la velocidad y logramos cumplir con el 95% de lo planeado.' }
+        ]},
+        { num: 4, lines: [
+            { speaker: 'Jefe', text: 'Me preocupa el ______ que nos queda. Estamos muy ajustados con la fecha límite.', blank: 'tiempo' },
+            { speaker: 'Gerente', text: 'Lo sé. Estamos optimizando la ______ diaria para evitar cuellos de botella.', blank: 'rutina' }
+        ]},
+        { num: 5, lines: [
+            { speaker: 'Jefe', text: '¿Ya terminaron el ______ de rendimiento para el cliente?', blank: 'informe' },
+            { speaker: 'Gerente', text: 'Sí, lo estoy puliendo. Incluye el análisis de los principales ______ del proyecto.', blank: 'KPI' }
+        ]},
+        { num: 6, lines: [
+            { speaker: 'Jefe', text: '¿Qué pasó con los ______ que reportó el usuario en producción?', blank: 'bugs' },
+            { speaker: 'Gerente', text: 'El equipo de desarrollo ya los identificó y están trabajando en la solución.' }
+        ]},
+        { num: 7, lines: [
+            { speaker: 'Jefe', text: 'El proceso de ______ tiene que ser más riguroso este mes. No quiero sorpresas.', blank: 'QA' },
+            { speaker: 'Gerente', text: 'De acuerdo. Añadimos una etapa de automatización para asegurar la calidad del código.' }
+        ]},
+        { num: 8, lines: [
+            { speaker: 'Jefe', text: '¿Estableciste los ______ para medir el éxito del nuevo módulo de pagos?', blank: 'KPI' },
+            { speaker: 'Gerente', text: 'Sí, definimos tres indicadores clave: tasa de conversión, tiempo de carga y errores de pasarela.' }
+        ]},
+        { num: 9, lines: [
+            { speaker: 'Jefe', text: '¿Cómo marcha el ______ del software? ¿Están usando la nueva arquitectura?', blank: 'desarrollo' },
+            { speaker: 'Gerente', text: 'Sí, el ______ de código avanza según lo previsto y la arquitectura limpia funciona excelente.', blank: 'desarrollo' }
+        ]},
+        { num: 10, lines: [
+            { speaker: 'Jefe', text: 'Che, organicemos una ______ corta con el equipo de infraestructura hoy mismo.', blank: 'reunión' },
+            { speaker: 'Gerente', text: 'Dale, armo una sesión de 15 minutos para resolver el bloqueo del servidor.' }
+        ]},
+        { num: 11, lines: [
+            { speaker: 'Jefe', text: 'No podemos perder más ______ en debates internos. Hay que ejecutar.', blank: 'tiempo' },
+            { speaker: 'Gerente', text: 'Tenés razón. Vamos a definir un flujo de toma de decisiones más ágil.' }
+        ]},
+        { num: 12, lines: [
+            { speaker: 'Jefe', text: '¿El equipo de ______ ya aprobó la versión beta?', blank: 'QA' },
+            { speaker: 'Gerente', text: 'Están en eso. El ______ de regresión termina esta tarde.', blank: 'test' }
+        ]},
+        { num: 13, lines: [
+            { speaker: 'Jefe', text: 'Mandame el ______ de horas invertidas por el equipo de diseño.', blank: 'informe' },
+            { speaker: 'Gerente', text: 'Te lo comparto por correo en cinco minutos, ya está consolidado.' }
+        ]},
+        { num: 14, lines: [
+            { speaker: 'Jefe', text: 'Si no cumplimos con el ______, el cliente va a penalizarnos.', blank: 'plazo' },
+            { speaker: 'Gerente', text: 'Estamos haciendo horas extra para asegurar que la entrega se haga el viernes sin falta.' }
+        ]},
+        { num: 15, lines: [
+            { speaker: 'Jefe', text: 'Hay que cambiar la ______ de despliegue para evitar caídas del sistema.', blank: 'estrategia' },
+            { speaker: 'Gerente', text: 'Coincido. Implementaremos un despliegue gradual (canary deployment).' }
+        ]},
+        { num: 16, lines: [
+            { speaker: 'Jefe', text: 'El ______ del producto no me convence, los colores no representan la marca.', blank: 'diseño' },
+            { speaker: 'Gerente', text: 'Le pediré al Diseñador UX/UI que revise la paleta y presente una propuesta mañana.' }
+        ]},
+        { num: 17, lines: [
+            { speaker: 'Jefe', text: '¿Qué ______ estamos usando para medir la satisfacción del usuario?', blank: 'métricas' },
+            { speaker: 'Gerente', text: 'Monitoreamos el Net Promoter Score (NPS) y el tiempo de retención en la plataforma.' }
+        ]},
+        { num: 18, lines: [
+            { speaker: 'Jefe', text: '¿Cómo es la ______ de trabajo de los desarrolladores remotos?', blank: 'rutina' },
+            { speaker: 'Gerente', text: 'Hacen una sincronización matutina, programan por bloques y luego actualizan el tablero Jira.' }
+        ]},
+        { num: 19, lines: [
+            { speaker: 'Jefe', text: 'Encontraron varios ______ críticos en la pasarela de autenticación.', blank: 'bugs' },
+            { speaker: 'Gerente', text: 'Los desarrolladores ya priorizaron esos fallos en el backlog para solucionarlos hoy.' }
+        ]},
+        { num: 20, lines: [
+            { speaker: 'Jefe', text: 'Armá una ______ con los líderes de QA y Desarrollo para mitigar los riesgos.', blank: 'reunión' },
+            { speaker: 'Gerente', text: 'Ya mismo les envío la invitación para reunirnos después del almuerzo.' }
+        ]}
+    ];
+
+    function renderDialogos() {
+        const container = document.getElementById('dialogosList');
+        let html = '';
+        dialogos.forEach((d, idx) => {
+            html += `<div class="dialogo-card" data-index="${idx}">`;
+            html += `<span class="dialogo-num">Diálogo ${d.num}</span>`;
+            d.lines.forEach((line, li) => {
+                const speakerClass = line.speaker === 'Jefe' ? 'jefe' : 'gerente';
+                let text = line.text;
+                if (line.blank) {
+                    const inputId = `d${idx}_l${li}`;
+                    text = text.replace('______', `<input type="text" class="blank" id="${inputId}" data-answer="${line.blank}" placeholder="escribe aquí" autocomplete="off">`);
+                }
+                html += `<div class="dialogo-line"><span class="speaker ${speakerClass}">${line.speaker}:</span> ${text}</div>`;
+            });
+            html += `</div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    function checkAllAnswers() {
+        const inputs = document.querySelectorAll('.blank');
+        let correct = 0, total = 0;
+        inputs.forEach(input => {
+            total++;
+            const answer = input.dataset.answer.toLowerCase().trim();
+            const userAnswer = input.value.toLowerCase().trim();
+            const validAnswers = [answer];
+            if (answer === 'informe') validAnswers.push('relatorio', 'reporte');
+            if (answer === 'bugs') validAnswers.push('errores', 'fallos');
+            if (answer === 'qa') validAnswers.push('teste', 'control de calidad', 'calidad');
+            if (answer === 'kpi') validAnswers.push('indicadores', 'métricas');
+            if (answer === 'diseño') validAnswers.push('design');
+            if (answer === 'reunión') validAnswers.push('rutina', 'meeting');
+            if (answer === 'plazo') validAnswers.push('deadline');
+            if (answer === 'estrategia') validAnswers.push('plan');
+            if (answer === 'métricas') validAnswers.push('kpi', 'indicadores');
+            if (answer === 'rutina') validAnswers.push('reunión');
+            if (answer === 'tiempo') validAnswers.push('plazo');
+
+            const isValid = validAnswers.some(a => a === userAnswer);
+            if (isValid) {
+                input.classList.add('correct');
+                input.classList.remove('incorrect');
+                correct++;
+            } else {
+                input.classList.add('incorrect');
+                input.classList.remove('correct');
+            }
+        });
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        scoreDisplay.textContent = `✅ ${correct} de ${total} correctas (${Math.round(correct/total*100)}%)`;
+        scoreDisplay.style.color = correct === total ? 'var(--success)' : 'var(--brown)';
+    }
+
+    function resetAllAnswers() {
+        document.querySelectorAll('.blank').forEach(input => {
+            input.value = '';
+            input.classList.remove('correct', 'incorrect');
+        });
+        document.getElementById('scoreDisplay').textContent = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && e.target.classList.contains('blank')) {
+            e.preventDefault();
+            checkAllAnswers();
+        }
+    });
+
+    // Inicializar todo
+    renderQuiz();
+    renderDialogos();
+</script>
+
+</body>
+</html>
