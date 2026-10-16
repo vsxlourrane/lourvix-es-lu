@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inmersión Activa · Español Profesional · Lourvix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           DESIGN TOKENS (inspirados en Lourvix)
+           ============================================ */
+        :root {
+            --copper: #B7794A;
+            --copper-hi: #D89A6A;
+            --copper-lo: #8E5A33;
+            --brown: #6B4423;
+            --brown-dark: #4A2C1E;
+            --obsidian: #2A1810;
+            --off: #F5F1E8;
+            --off-2: #EBE4D5;
+            --off-3: #E0D7C2;
+            --ivory: #FAF7F0;
+            --od: #FFB000;
+            --success: #5C8A52;
+            --success-bg: rgba(92, 138, 82, .12);
+            --danger: #B44A3A;
+            --danger-bg: rgba(180, 74, 58, .12);
+            --text: #2A1810;
+            --text-mute: #7A6250;
+            --text-ivory: #F5F1E8;
+            --text-ivory-m: rgba(245, 241, 232, .68);
+            --line: rgba(107, 68, 35, .18);
+            --line-2: rgba(107, 68, 35, .09);
+            --ff-display: 'Montserrat', system-ui, sans-serif;
+            --ff-text: 'Inter', system-ui, -apple-system, sans-serif;
+            --shadow-sm: 0 2px 12px rgba(107, 68, 35, .08);
+            --shadow-md: 0 12px 32px rgba(107, 68, 35, .12);
+            --shadow-lg: 0 24px 60px rgba(107, 68, 35, .18);
+            --shadow-copper: 0 16px 40px rgba(183, 121, 74, .30);
+            --radius: 18px;
+            --radius-lg: 26px;
+            --max: 1240px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            margin: 0;
+            font-family: var(--ff-text);
+            font-size: 16px;
+            line-height: 1.65;
+            color: var(--text);
+            background: var(--off);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4 { font-family: var(--ff-display); font-weight: 800; letter-spacing: -.015em; margin: 0; }
+        button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+        .container { max-width: var(--max); margin-inline: auto; padding-inline: 24px; }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .site-header {
+            background: var(--obsidian);
+            color: var(--text-ivory);
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .site-header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(245, 241, 232, .03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(245, 241, 232, .03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000, transparent 80%);
+            pointer-events: none;
+        }
+        .site-header .container { position: relative; z-index: 1; }
+        .site-header .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--ff-display);
+            font-weight: 800;
+            font-size: .8rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--copper-hi);
+            margin-bottom: 20px;
+        }
+        .site-header .brand .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--copper-hi);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(.8); }
+        }
+        .site-header h1 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            color: var(--ivory);
+            margin-bottom: 12px;
+        }
+        .site-header .subtitle {
+            color: var(--text-ivory-m);
+            font-size: clamp(.95rem, 1.5vw, 1.1rem);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           SECTION HEADERS
+           ============================================ */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(183, 121, 74, .1);
+            border: 1px solid rgba(183, 121, 74, .25);
+            color: var(--copper-lo);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: .72rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+        .section-header h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            color: var(--brown-dark);
+            margin-bottom: 12px;
+        }
+        .section-header p {
+            color: var(--text-mute);
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        /* ============================================
+           01 · FLASHCARDS
+           ============================================ */
+        .flashcards {
+            padding: clamp(60px, 10vw, 120px) 0;
+            background: var(--off);
+        }
+        .flashcards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .flashcard {
+            perspective: 1200px;
+            height: 240px;
+            cursor: pointer;
+        }
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform .6s cubic-bezier(.4, 0, .2, 1);
+            transform-style: preserve-3d;
+        }
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: var(--radius);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow .2s ease;
+        }
+        .flashcard:hover .flashcard-front,
+        .flashcard:hover .flashcard-back {
+            box-shadow: var(--shadow-md);
+        }
+        .flashcard-front {
+            background: var(--ivory);
+            border: 1px solid var(--line-2);
+        }
+        .flashcard-front .country {
+            font-size: .65rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--copper-lo);
+            background: rgba(183, 121, 74, .1);
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-bottom: 16px;
+        }
+        .flashcard-front .phrase {
+            font-family: var(--ff-display);
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--brown-dark);
+            line-height: 1.4;
+        }
+        .flashcard-front .hint {
+            margin-top: 16px;
+            font-size: .75rem;
+            color: var(--text-mute);
+            font-style: italic;
+        }
+        .flashcard-back {
+            background: var(--brown-dark);
+            color: var(--ivory);
+            transform: rotateY(180deg);
+            padding: 20px;
+        }
+        .flashcard-back .translation {
+            font-family: var(--ff-display);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--copper-hi);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .flashcard-back .context {
+            font-size: .78rem;
+            color: var(--text-ivory-m);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           02 · QUIZ
+           ============================================ */
+        .quiz {
+            padding: clamp(60px, 10vw, 120px) 0;
+            background: linear-gradient(180deg, var(--off) 0%, var(--off-2) 100%);
+        }
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .quiz-card {
+            background: var(--ivory);
+            border: 1px solid var(--line-2);
+            border-radius: var(--radius-lg);
+            padding: 28px 26px;
+            box-shadow: var(--shadow-sm);
+            transition: all .3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .quiz-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+        .quiz-card .quiz-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            background: var(--copper);
+            color: var(--ivory);
+            font-family: var(--ff-display);
+            font-weight: 800;
+            font-size: .85rem;
+            border-radius: 50%;
+            margin-bottom: 16px;
+        }
+        .quiz-card .quiz-tag {
+            display: inline-block;
+            background: rgba(183, 121, 74, .1);
+            color: var(--copper-lo);
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            width: fit-content;
+        }
+        .quiz-card .quiz-question {
+            font-family: var(--ff-display);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--brown-dark);
+            margin-bottom: 20px;
+            line-height: 1.45;
+        }
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: auto;
+        }
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: var(--off);
+            border: 1.5px solid var(--line-2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all .2s ease;
+            font-size: .88rem;
+            color: var(--text);
+            text-align: left;
+            line-height: 1.4;
+            width: 100%;
+        }
+        .quiz-option:hover:not(.disabled) {
+            border-color: var(--copper);
+            background: rgba(183, 121, 74, .06);
+            transform: translateX(3px);
+        }
+        .quiz-option .letter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            border-radius: 50%;
+            background: var(--off-3);
+            color: var(--brown);
+            font-family: var(--ff-display);
+            font-weight: 800;
+            font-size: .72rem;
+            transition: all .2s ease;
+        }
+        .quiz-option.selected {
+            border-color: var(--copper);
+            background: rgba(183, 121, 74, .1);
+        }
+        .quiz-option.selected .letter {
+            background: var(--copper);
+            color: var(--ivory);
+        }
+        .quiz-option.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+        .quiz-option.correct .letter {
+            background: var(--success);
+            color: var(--ivory);
+        }
+        .quiz-option.incorrect {
+            background: var(--danger-bg);
+            border-color: var(--danger);
+            color: var(--danger);
+            font-weight: 600;
+        }
+        .quiz-option.incorrect .letter {
+            background: var(--danger);
+            color: var(--ivory);
+        }
+        .quiz-option.disabled {
+            cursor: not-allowed;
+            opacity: .9;
+        }
+        .quiz-feedback {
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: .84rem;
+            line-height: 1.5;
+            display: none;
+            animation: slideIn .3s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.ok {
+            background: var(--success-bg);
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+        .quiz-feedback.no {
+            background: var(--danger-bg);
+            color: var(--danger);
+            border-left: 4px solid var(--danger);
+        }
+
+        /* ============================================
+           03 · PLUMA DINÁMICA (Verdadero o Falso)
+           ============================================ */
+        .pluma {
+            padding: clamp(60px, 10vw, 120px) 0;
+            background: var(--off);
+        }
+        .pluma-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .pluma-card {
+            background: var(--ivory);
+            border: 1px solid var(--line-2);
+            border-radius: var(--radius);
+            padding: 24px 26px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow .2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .pluma-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+        .pluma-card .pluma-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--copper);
+            color: var(--ivory);
+            font-family: var(--ff-display);
+            font-weight: 800;
+            font-size: .78rem;
+            border-radius: 50%;
+            margin-bottom: 12px;
+        }
+        .pluma-card .pluma-statement {
+            font-size: .95rem;
+            line-height: 1.6;
+            color: var(--brown-dark);
+            margin-bottom: 18px;
+            flex: 1;
+        }
+        .pluma-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+        }
+        .pluma-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-family: var(--ff-display);
+            font-weight: 700;
+            font-size: .82rem;
+            letter-spacing: .03em;
+            transition: all .2s ease;
+            border: 2px solid var(--line);
+            background: var(--off);
+            color: var(--text);
+        }
+        .pluma-btn:hover:not(.disabled) {
+            border-color: var(--copper);
+            background: rgba(183, 121, 74, .08);
+            transform: translateY(-2px);
+        }
+        .pluma-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .pluma-btn.incorrect {
+            background: var(--danger-bg);
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+        .pluma-btn.disabled {
+            cursor: not-allowed;
+            opacity: .7;
+        }
+        .pluma-explanation {
+            margin-top: 14px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: .84rem;
+            line-height: 1.5;
+            display: none;
+            animation: slideIn .3s ease;
+        }
+        .pluma-explanation.show { display: block; }
+        .pluma-explanation.ok {
+            background: var(--success-bg);
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+        .pluma-explanation.no {
+            background: var(--danger-bg);
+            color: var(--danger);
+            border-left: 4px solid var(--danger);
+        }
+
+        /* ============================================
+           04 · VOCABULARIO Y CULTURA
+           ============================================ */
+        .vocab {
+            padding: clamp(60px, 10vw, 120px) 0;
+            background: linear-gradient(180deg, var(--off) 0%, var(--off-2) 100%);
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .vocab-card {
+            background: var(--ivory);
+            border: 1px solid var(--line-2);
+            border-radius: var(--radius);
+            padding: 22px 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all .3s ease;
+        }
+        .vocab-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+        .vocab-card .vocab-category {
+            font-size: .65rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--copper-lo);
+            background: rgba(183, 121, 74, .1);
+            padding: 3px 10px;
+            border-radius: 100px;
+            width: fit-content;
+            margin-bottom: 12px;
+        }
+        .vocab-card .vocab-term {
+            font-family: var(--ff-display);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--brown-dark);
+            margin-bottom: 6px;
+        }
+        .vocab-card .vocab-translation {
+            font-size: .85rem;
+            color: var(--copper-lo);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .vocab-card .vocab-note {
+            font-size: .78rem;
+            color: var(--text-mute);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .site-footer {
+            background: var(--obsidian);
+            color: var(--text-ivory-m);
+            padding: 32px 0;
+            text-align: center;
+            font-size: .82rem;
+        }
+        .site-footer .brand {
+            font-family: var(--ff-display);
+            font-weight: 800;
+            color: var(--copper-hi);
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .flashcards-grid { grid-template-columns: repeat(2, 1fr); }
+            .quiz-grid { grid-template-columns: 1fr; }
+            .pluma-list { grid-template-columns: 1fr; }
+            .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .flashcards-grid { grid-template-columns: 1fr; }
+            .vocab-grid { grid-template-columns: 1fr; }
+            .flashcard { height: 220px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================
+     HEADER
+     ============================================ -->
+<header class="site-header">
+    <div class="container">
+        <div class="brand">
+            <span class="dot"></span>
+            LOURVIX · INMERSIÓN ACTIVA
+        </div>
+        <h1>Español Profesional · Lucas</h1>
+        <p class="subtitle">Flashcards, quiz, pluma dinámica y vocabulario clave para dominar el español de trabajo con tus colegas de Latinoamérica.</p>
+    </div>
+</header>
+
+<!-- ============================================
+     01 · FLASHCARDS
+     ============================================ -->
+<section class="flashcards" id="flashcards">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">01 · Memoria Activa</span>
+            <h2>Flashcards · Expresiones Latinoamericanas</h2>
+            <p>Haz clic en cada carta para virar y ver la traducción y el contexto. 12 expresiones de Chile, Argentina y Panamá.</p>
+        </div>
+        <div class="flashcards-grid" id="flashcardsGrid"></div>
+    </div>
+</section>
+
+<!-- ============================================
+     02 · QUIZ
+     ============================================ -->
+<section class="quiz" id="quiz">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">02 · Recuperación Activa</span>
+            <h2>Quiz · Backend, Arquitectura y Pagos</h2>
+            <p>20 preguntas de múltiple opción. Elige la respuesta correcta y recibe feedback inmediato.</p>
+        </div>
+        <div class="quiz-grid" id="quizGrid"></div>
+        <div style="text-align: center; margin-top: 40px;">
+            <button class="btn btn-primary" onclick="checkQuiz()" style="font-family: var(--ff-display); font-weight: 700; font-size: .9rem; padding: 14px 32px; border-radius: 100px; background: var(--copper); color: var(--ivory); box-shadow: var(--shadow-copper);">✅ Verificar Todo</button>
+            <button class="btn btn-ghost" onclick="resetQuiz()" style="font-family: var(--ff-display); font-weight: 700; font-size: .9rem; padding: 14px 32px; border-radius: 100px; background: transparent; color: var(--copper-lo); border: 2px solid var(--copper); margin-left: 12px;">🔄 Reiniciar</button>
+        </div>
+        <div id="quizScore" style="text-align: center; margin-top: 24px; font-family: var(--ff-display); font-weight: 700; font-size: 1.15rem; color: var(--brown); min-height: 30px;"></div>
+    </div>
+</section>
+
+<!-- ============================================
+     03 · PLUMA DINÁMICA (Verdadero o Falso)
+     ============================================ -->
+<section class="pluma" id="pluma">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">03 · Pluma Dinámica</span>
+            <h2>Verdadero o Falso · Días, Horas y TI</h2>
+            <p>20 afirmaciones sobre días, horarios y su relación con la ingeniería de software. Elige Verdadero o Falso y lee la explicación.</p>
+        </div>
+        <div class="pluma-list" id="plumaList"></div>
+    </div>
+</section>
+
+<!-- ============================================
+     04 · VOCABULARIO Y CULTURA
+     ============================================ -->
+<section class="vocab" id="vocab">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">04 · Vocabulario y Cultura</span>
+            <h2>Expresiones Clave para Sonar Natural</h2>
+            <p>Días, horas y rutina. Para recordar y usar en tu día a día profesional.</p>
+        </div>
+        <div class="vocab-grid" id="vocabGrid"></div>
+    </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="brand">LOURVIX · ESPAÑOL EN ACCIÓN</div>
+        <p>© 2026 Lourvix. Material didáctico para inmersión activa.</p>
+    </div>
+</footer>
+
+<script>
+    // ============================================
+    // 01 · FLASHCARDS DATA
+    // ============================================
+    const flashcardsData = [
+        { country: 'Chile · Backend', phrase: '¿Cachai o erro?', translation: 'Você entendeu/sacou o erro?', context: 'Usado o tempo todo entre desenvolvedores para confirmar se o colega entendeu uma falha na lógica de uma API ou um bug no código.' },
+        { country: 'Chile · DevOps', phrase: 'Tirar la carne a la parrilla', translation: 'Subir tudo para a produção de uma vez / Deploy massivo.', context: 'Traduzido como "colocar a carne na churrasqueira". Significa lançar todas as features pesadas de backend de uma vez só no ambiente oficial.' },
+        { country: 'Chile · Code Review', phrase: 'El código está harto pije', translation: 'O código está muito elegante, limpo e bem estruturado.', context: '"Pije" significa elegante ou de alta classe. É um elogio durante o Code Review para um código backend que segue ótimas práticas e padrões de projeto (Clean Code).' },
+        { country: 'Chile · Banco de Dados', phrase: 'Quedó la escoba en la base de datos', translation: 'Deu tudo errado / Virou uma bagunça completa no banco de dados.', context: 'Significa que um script mal executado ou uma query sem WHERE destruiu, duplicou ou corrompeu os dados.' },
+        { country: 'Argentina · Arquitetura', phrase: 'Atar el backend con alambre', translation: 'Fazer uma gambiarra / Solução técnica provisória.', context: '"Atar com arame" é uma expressão cultural argentina para consertar algo de forma improvisada. No backend, significa criar um código paliativo para resolver um bug urgente na produção.' },
+        { country: 'Argentina · APIs', phrase: 'No le des bola a esse endpoint', translation: 'Não preste atenção / Ignore esse endpoint.', context: '"Dar bola" significa prestar atenção. Muito usado quando uma rota da API está depreciada (deprecated) e não deve mais ser integrada.' },
+        { country: 'Argentina · Testes', phrase: 'Estar al horno com os testes unitários', translation: 'Estar ferrado / Em uma situação muito complicada com os testes.', context: 'Significa que o prazo de entrega (deadline) está estourando e a cobertura de testes unitários do backend está zerada ou quebrando.' },
+        { country: 'Argentina · Performance', phrase: 'Ponete las pilas con la optimización', translation: 'Fique esperto / Dedique-se / Coloque energia na otimização.', context: 'Pedido para o desenvolvedor focar em melhorar a performance de uma query lenta ou reduzir o consumo de memória do servidor.' },
+        { country: 'Panamá · Infraestrutura', phrase: 'Ese servidor está bien yeyo', translation: 'Aquele servidor é de ponta / Muito moderno / "Chique".', context: '"Yeyo" ou "Yeyito" refere-se a coisas de alta classe ou caras. No contexto de TI, indica uma infraestrutura de nuvem robusta, moderna e cara (como instâncias de alta performance na AWS/Azure).' },
+        { country: 'Panamá · Deploy', phrase: 'El despliegue fue un chenchén', translation: 'O deploy foi muito fácil / Uma uva / Sem problemas.', context: 'No Panamá, "chenchén" é uma gíria comum para dinheiro, mas no dia a dia da tecnologia (e por influência caribenha) também pode ser adaptado para algo que fluiu muito bem, sem fricção ou que deu bom retorno rápido.' },
+        { country: 'Panamá · Monitoramento', phrase: 'El sistema se fue a la porra', translation: 'O sistema caiu completamente / Deu crash.', context: 'Expressão usada quando os serviços backend saem do ar de forma repentina e severa (Downtime).' },
+        { country: 'Panamá · Programação', phrase: 'Tirar una liña', translation: 'Escrever código / Codar.', context: 'Uma adaptação local de "escrever linhas de código". Usado em frases como "Déjame tirar una liña para resolver esta lógica del backend" (Deixe-me codar um pouco para resolver essa lógica).' }
+    ];
+
+    function renderFlashcards() {
+        const grid = document.getElementById('flashcardsGrid');
+        let html = '';
+        flashcardsData.forEach((card, idx) => {
+            html += `<div class="flashcard" onclick="this.classList.toggle('flipped')">`;
+            html += `<div class="flashcard-inner">`;
+            html += `<div class="flashcard-front">`;
+            html += `<span class="country">${card.country}</span>`;
+            html += `<div class="phrase">${card.phrase}</div>`;
+            html += `<div class="hint">Clique para ver a tradução</div>`;
+            html += `</div>`;
+            html += `<div class="flashcard-back">`;
+            html += `<div class="translation">${card.translation}</div>`;
+            html += `<div class="context">${card.context}</div>`;
+            html += `</div>`;
+            html += `</div>`;
+            html += `</div>`;
+        });
+        grid.innerHTML = html;
+    }
+
+    // ============================================
+    // 02 · QUIZ DATA
+    // ============================================
+    const quizData = [
+        { tag: 'Microservicios', question: '¿Qué patrón de arquitectura de microservicios usarías para procesar un pago que requiere una transacción distribuida sin bloquear todo el sistema?', options: [ { text: 'Patrón Servidor Monolítico al Palo', correct: false }, { text: 'Patrón Saga (Orquestación o Coreografía)', correct: true }, { text: 'Patrón de la Corriente del Golfo', correct: false }, { text: 'Patrón Base de Datos Única y Compartida', correct: false } ], feedbackOk: 'El patrón Saga maneja transacciones distribuidas con consistencia eventual y compensaciones (rollback lógico).', feedbackNo: 'El patrón correcto es Saga. Un monolito frena el escalado, dejar los datos fluir sin control es un dolor de cabeza, y compartir una sola base de datos destruye el desacoplamiento.' },
+        { tag: 'API REST', question: 'En una API REST, ¿qué código de estado HTTP deberías retornar si una pasarela de pagos rechaza una tarjeta por fondos insuficientes?', options: [ { text: '200 OK', correct: false }, { text: '402 Payment Required o 422 Unprocessable Entity', correct: true }, { text: '500 Internal Server Error', correct: false }, { text: '418 I\'m a teapot', correct: false } ], feedbackOk: 'El 402 o 422 indican que la solicitud está bien formada pero la lógica de negocio no pudo procesarla.', feedbackNo: 'Un 200 confundiría al cliente, un 500 culpa al servidor, y el 418 es un meme de la especificación HTTP.' },
+        { tag: 'Idempotencia', question: '¿Para qué sirve implementar un mecanismo de Idempotencia en las peticiones POST de un webhook de pagos?', options: [ { text: 'Para que la API cobre doble por error', correct: false }, { text: 'Para asegurar que si una red inestable reintenta el mismo pago, el sistema procese el cargo una sola vez', correct: true }, { text: 'Para que el servidor responda más rápido usando magia negra', correct: false }, { text: 'Para encriptar la contraseña del usuario con un algoritmo de la NASA', correct: false } ], feedbackOk: 'La idempotencia garantiza que repetir la misma solicitud produzca el mismo resultado sin efectos secundarios duplicados.', feedbackNo: 'Cobrar doble arruinaría el negocio. La idempotencia no tiene que ver con velocidad ni encriptación.' },
+        { tag: 'Arquitectura EDA', question: '¿Qué ventaja principal te da usar una arquitectura orientada a eventos (EDA) con mensajería (ej. RabbitMQ o Kafka) para notificaciones de pago?', options: [ { text: 'Acoplar fuertemente los servicios', correct: false }, { text: 'Desacoplar los productores de eventos de los consumidores, permitiendo asincronía y resiliencia', correct: true }, { text: 'Hacer que los mensajes pesen 500 megas cada uno', correct: false }, { text: 'Evitar por completo el uso de bases de datos relacionales', correct: false } ], feedbackOk: 'Con un broker de mensajes, si un servicio se cae, el mensaje se queda en la cola y se procesa después.', feedbackNo: 'Acoplar fuertemente va en contra de la resiliencia. La mensajería no reemplaza a las bases de datos.' },
+        { tag: 'Circuit Breaker', question: 'En patrones de diseño de microservicios, ¿qué es un Circuit Breaker (Cortacircuitos)?', options: [ { text: 'Un fusible eléctrico físico', correct: false }, { text: 'Un patrón que evita que una aplicación siga intentando llamar a un servicio externo que ya sabemos que no responde', correct: true }, { text: 'Una técnica de QA para quemar los servidores de pruebas', correct: false }, { text: 'Un algoritmo de ordenamiento más rápido que Quicksort', correct: false } ], feedbackOk: 'El Circuit Breaker abre el circuito y falla rápido ("fast fail") en lugar de agotar las conexiones del pool.', feedbackNo: 'No es hardware eléctrico, ni una técnica para destruir servidores, ni un algoritmo de ordenamiento.' },
+        { tag: 'RabbitMQ', question: '¿Cuál es la diferencia clave entre un intercambio (Exchange) de tipo Topic y uno de tipo Direct en RabbitMQ?', options: [ { text: 'Topic usa patrones con comodines (* y #), mientras que Direct usa una coincidencia exacta de la clave de enrutamiento', correct: true }, { text: 'Direct es para enviar audios de WhatsApp y Topic es para llamadas de Zoom', correct: false }, { text: 'No hay diferencia, son nombres inventados', correct: false }, { text: 'Topic solo funciona en Linux y Direct solo en Windows 95', correct: false } ], feedbackOk: 'El exchange Direct enruta basándose en una clave exacta; Topic permite comodines para rutas flexibles.', feedbackNo: 'Las opciones B, C y D son disparates. La diferencia real está en el uso de comodines y coincidencia exacta.' },
+        { tag: 'Seguridad', question: '¿Por qué es una pésima práctica almacenar contraseñas de usuarios en texto plano en la base de datos?', options: [ { text: 'Porque ocupan demasiados caracteres y gastan memoria RAM', correct: false }, { text: 'Porque si hay una brecha de seguridad, cualquier atacante sabrá la clave de todos tus usuarios', correct: true }, { text: 'Porque el lenguaje de programación se pone celoso y se congela', correct: false }, { text: 'Porque las bases de datos NoSQL odian las letras minúsculas', correct: false } ], feedbackOk: 'Siempre debes usar funciones de hash robustas con salting (bcrypt, Argon2 o PBKDF2).', feedbackNo: 'El consumo de memoria es mínimo, los lenguajes no se ponen celosos, y las bases de datos almacenan cadenas sin importar mayúsculas o minúsculas.' },
+        { tag: 'Dependency Injection', question: '¿Qué es la Inyección de Dependencias (Dependency Injection) en el desarrollo backend?', options: [ { text: 'Meterle código malicioso a la aplicación', correct: false }, { text: 'Un patrón de diseño donde un objeto recibe las dependencias que necesita desde el exterior en lugar de crearlas internamente', correct: true }, { text: 'Una técnica de bases de datos para inyectar dinero virtual', correct: false }, { text: 'Conectar el mouse y el teclado por Bluetooth', correct: false } ], feedbackOk: 'La inyección de dependencias desacopla las clases, facilitando las pruebas unitarias.', feedbackNo: 'No es hackeo, no inyecta dinero, ni tiene que ver con periféricos.' },
+        { tag: 'Transacciones', question: 'En bases de datos relacionales, ¿qué problema previene el uso de transacciones con niveles de aislamiento adecuados en un sistema de pagos?', options: [ { text: 'Que el monitor se quede sin brillo', correct: false }, { text: 'Problemas de concurrencia como condiciones de carrera o lecturas fantasma', correct: true }, { text: 'Que el código en Python tarde más de 2 segundos en compilar', correct: false }, { text: 'Que el servidor se infecte con virus troyanos', correct: false } ], feedbackOk: 'Las transacciones evitan que dos hilos actualicen el mismo saldo simultáneamente sin control.', feedbackNo: 'Las opciones A, C y D no tienen relación con el motor de base de datos ni con los niveles de aislamiento ACID.' },
+        { tag: 'API Stateless', question: '¿Qué significa que una API REST sea Stateless (Sin estado)?', options: [ { text: 'Que el servidor no guarda ninguna sesión del cliente; cada petición debe contener toda la información necesaria', correct: true }, { text: 'Que la API no tiene un país de origen definido', correct: false }, { text: 'Que el backend se apaga solo cuando nadie lo está mirando', correct: false }, { text: 'Que puedes escribir código sin usar variables', correct: false } ], feedbackOk: 'Al ser stateless, cualquier instancia del servidor puede atender cualquier petición, facilitando el escalado horizontal.', feedbackNo: 'No tiene que ver con geografía, ni con apagarse solo, ni con prohibir variables.' },
+        { tag: 'Testing', question: '¿Qué es un Mock en el contexto de pruebas unitarias?', options: [ { text: 'Un insulto cariñoso en Argentina', correct: false }, { text: 'Un objeto simulado que imita el comportamiento de dependencias reales para aislar la unidad de código', correct: true }, { text: 'Un error de sintaxis que bota la aplicación', correct: false }, { text: 'Una herramienta para maquillar gráficos', correct: false } ], feedbackOk: 'Un mock te permite controlar las respuestas de servicios externos sin tocar la red real.', feedbackNo: 'En tecnología, un mock es un objeto de prueba simulado; no es un error ni maquillaje gráfico.' },
+        { tag: 'Test Pyramid', question: 'Según la Pirámide de Pruebas de Mike Cohn, ¿cuál tipo de pruebas debe tener mayor volumen en tu aplicación?', options: [ { text: 'Pruebas End-to-End (E2E) con Selenium o Cypress', correct: false }, { text: 'Pruebas manuales hechas por el jefe un viernes', correct: false }, { text: 'Pruebas Unitarias (Unit Tests)', correct: true }, { text: 'Pruebas de estrés con computadoras de la NASA', correct: false } ], feedbackOk: 'La base de la pirámide son las pruebas unitarias. Son miles, corren en segundos y avisan al instante si rompiste algo.', feedbackNo: 'Las E2E son costosas de mantener arriba; dejarle todo a pruebas manuales de último minuto es buscarse un despido.' },
+        { tag: 'Code Coverage', question: '¿Qué métrica de cobertura evalúa cuántas de las posibles rutas de decisión (if/else, bucles) fueron ejecutadas?', options: [ { text: 'Cobertura de Líneas', correct: false }, { text: 'Cobertura de Ramas (Branch Coverage)', correct: true }, { text: 'Cobertura de Píxeles en Pantalla', correct: false }, { text: 'Cobertura de Banda Ancha', correct: false } ], feedbackOk: 'La cobertura de ramas verifica si probaste tanto el camino verdadero como el falso de tus condicionales.', feedbackNo: 'La cobertura de líneas solo mira si la línea se leyó; las otras opciones no tienen que ver con análisis de código.' },
+        { tag: 'QA', question: 'En QA, ¿qué diferencia fundamental existe entre la Prueba de Caja Negra y la Prueba de Caja Blanca?', options: [ { text: 'La caja negra se hace de noche y la blanca de día', correct: false }, { text: 'La caja negra prueba la funcionalidad externa sin conocer el código, mientras que la blanca evalúa la estructura interna', correct: true }, { text: 'La caja negra es para juniors y la blanca es para arquitectos senior', correct: false }, { text: 'La caja negra usa SQL y la blanca usa NoSQL', correct: false } ], feedbackOk: 'En caja negra te importa que el pago pase; en caja blanca inspeccionas el código interno, la complejidad ciclomática y las funciones.', feedbackNo: 'Son mitos jocosos que nada tienen que ver con las metodologías de pruebas formales.' },
+        { tag: 'Regresión', question: '¿Qué es una Prueba de Regresión y por qué es vital al actualizar un microservicio de pagos?', options: [ { text: 'Una prueba para ver si el software puede retroceder en el tiempo', correct: false }, { text: 'Ejecutar la suite de pruebas existentes para asegurar que los cambios no hayan roto características que ya funcionaban', correct: true }, { text: 'Probar la aplicación usando Netscape Navigator', correct: false }, { text: 'Una técnica para auditar los impuestos de la empresa', correct: false } ], feedbackOk: 'Cada vez que metes código nuevo, corres el riesgo de romper otra cosa (regresión). Las pruebas de regresión automatizadas te salvan la vida.', feedbackNo: 'El software no viaja en el tiempo, no depende de navegadores viejos, ni audita finanzas fiscales.' },
+        { tag: 'TDD', question: '¿Qué describe el acrónimo TDD (Test-Driven Development) en el ciclo de vida del desarrollo?', options: [ { text: '"Todo Debería Descansar"', correct: false }, { text: 'Un ciclo donde primero escribes la prueba unitaria (que falla), luego el código mínimo para hacerla pasar, y finalmente refactorizas', correct: true }, { text: '"Testear Después a la Diabla"', correct: false }, { text: 'Una base de datos ultrarrápida desarrollada en Argentina', correct: false } ], feedbackOk: 'Es el famoso ciclo Red-Green-Refactor. Diseñas primero la prueba pensando en el comportamiento deseado.', feedbackNo: 'La opción A es pereza pura; la opción C es lo opuesto a buenas prácticas; la D es un invento.' },
+        { tag: 'Stress Testing', question: '¿Para qué se utiliza una Prueba de Carga / Estrés en un backend de pagos de alta concurrencia?', options: [ { text: 'Para medir cuánta paciencia tiene el cliente', correct: false }, { text: 'Para simular miles de usuarios concurrentes y descubrir cuellos de botella, límites de la base de datos y caídas del servidor', correct: true }, { text: 'Para calentar los procesadores en invierno', correct: false }, { text: 'Para verificar que los colores de la interfaz no lastimen los ojos', correct: false } ], feedbackOk: 'Herramientas como k6, JMeter o Gatling te ayudan a meterle tráfico masivo al backend.', feedbackNo: 'No miden paciencia humana, no calientan oficinas, ni evalúan colores de interfaz.' },
+        { tag: 'Test Doubles', question: '¿Qué es un Stub en el mundo de los dobles de prueba?', options: [ { text: 'El dedo chiquito del pie', correct: false }, { text: 'Un objeto de prueba que proporciona respuestas predefinidas a las llamadas hechas durante la prueba', correct: true }, { text: 'Un error crítico de compilación', correct: false }, { text: 'Un registro de errores en los servidores de AWS', correct: false } ], feedbackOk: 'A diferencia de un Mock, un Stub simplemente "alimenta" con datos preconfigurados a tu función.', feedbackNo: 'No es un golpe en el pie, no es un error de compilación, ni un log de AWS.' },
+        { tag: 'Contract Testing', question: '¿Cuál de las siguientes afirmaciones sobre los contratos de API y las pruebas orientadas a contratos (ej. Pact) es verdadera?', options: [ { text: 'Sirven para firmar contratos legales de trabajo remoto', correct: false }, { text: 'Permiten validar que los microservicios consumidores y productores cumplan con el contrato de la API sin levantar todo el ecosistema completo', correct: true }, { text: 'Son contratos en PDF que se imprimen y se firman con pluma', correct: false }, { text: 'Garantizan que el backend nunca jamás tendrá bugs', correct: false } ], feedbackOk: 'Las pruebas basadas en contratos salvan vidas en arquitecturas de microservicios distribuidos.', feedbackNo: 'No son contratos legales, no se firman en papel, y ninguna prueba garantiza ausencia total de bugs.' },
+        { tag: 'CI/CD', question: 'En el proceso de integración continua (CI/CD), ¿en qué momento exacto se deben ejecutar típicamente las pruebas unitarias?', options: [ { text: 'En cada git push o Pull Request antes de fusionar el código a la rama principal', correct: true }, { text: 'Únicamente una vez al año, el 31 de diciembre a medianoche', correct: false }, { text: 'Solo cuando el cliente final se queje en soporte técnico', correct: false }, { text: 'Después de que la aplicación ya fue eliminada de los servidores', correct: false } ], feedbackOk: 'La gracia de la Integración Continua es el "feedback" inmediato. Si un desarrollador mete un cambio que rompe el módulo de pagos, la tubería de CI/CD frena el merge al instante.', feedbackNo: 'Esperar al fin de año, esperar que se queje el cliente o correrlas cuando ya borraste el servidor son recetas directas al fracaso absoluto.' }
+    ];
+
+    let quizState = quizData.map(() => ({ selected: null, checked: false }));
+
+    function renderQuiz() {
+        const grid = document.getElementById('quizGrid');
+        let html = '';
+        quizData.forEach((card, idx) => {
+            html += `<div class="quiz-card" data-index="${idx}">`;
+            html += `<div class="quiz-num">${idx + 1}</div>`;
+            html += `<span class="quiz-tag">${card.tag}</span>`;
+            html += `<div class="quiz-question">${card.question}</div>`;
+            html += `<div class="quiz-options">`;
+            card.options.forEach((opt, oi) => {
+                const letter = String.fromCharCode(65 + oi);
+                html += `<button class="quiz-option" data-card="${idx}" data-opt="${oi}" onclick="selectQuizOption(${idx}, ${oi})">`;
+                html += `<span class="letter">${letter}</span>`;
+                html += `<span>${opt.text}</span>`;
+                html += `</button>`;
+            });
+            html += `</div>`;
+            html += `<div class="quiz-feedback" id="quizFeedback${idx}"></div>`;
+            html += `</div>`;
+        });
+        grid.innerHTML = html;
+    }
+
+    function selectQuizOption(cardIdx, optIdx) {
+        const state = quizState[cardIdx];
+        if (state.checked) return;
+        state.selected = optIdx;
+        const card = document.querySelector(`.quiz-card[data-index="${cardIdx}"]`);
+        card.querySelectorAll('.quiz-option').forEach((btn, i) => {
+            btn.classList.toggle('selected', i === optIdx);
+        });
+    }
+
+    function checkQuiz() {
+        let correct = 0;
+        quizData.forEach((card, idx) => {
+            const state = quizState[idx];
+            if (state.selected === null) return;
+            state.checked = true;
+            const selectedIdx = state.selected;
+            const isCorrect = card.options[selectedIdx].correct;
+            const cardEl = document.querySelector(`.quiz-card[data-index="${idx}"]`);
+            const buttons = cardEl.querySelectorAll('.quiz-option');
+            buttons.forEach((btn, i) => {
+                btn.classList.add('disabled');
+                btn.classList.remove('selected');
+                if (i === selectedIdx) {
+                    btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+                if (!isCorrect && card.options[i].correct) {
+                    btn.classList.add('correct');
+                }
+            });
+            const fb = document.getElementById(`quizFeedback${idx}`);
+            fb.className = 'quiz-feedback show ' + (isCorrect ? 'ok' : 'no');
+            fb.innerHTML = isCorrect ? `✅ ${card.feedbackOk}` : `❌ ${card.feedbackNo}`;
+            if (isCorrect) correct++;
+        });
+        const total = quizData.length;
+        const answered = quizState.filter(s => s.selected !== null).length;
+        if (answered === 0) {
+            document.getElementById('quizScore').textContent = '⚠️ Selecciona al menos una opción antes de verificar.';
+            return;
+        }
+        const pct = Math.round((correct / total) * 100);
+        const scoreEl = document.getElementById('quizScore');
+        scoreEl.innerHTML = `Acertaste <span style="color: var(--copper); font-size: 1.4rem;">${correct}/${total}</span> (${pct}%)`;
+        scoreEl.style.color = correct === total ? 'var(--success)' : (correct >= total * 0.6 ? 'var(--brown)' : 'var(--danger)');
+    }
+
+    function resetQuiz() {
+        quizState = quizData.map(() => ({ selected: null, checked: false }));
+        document.querySelectorAll('.quiz-card').forEach(cardEl => {
+            cardEl.querySelectorAll('.quiz-option').forEach(btn => {
+                btn.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+            });
+            const idx = cardEl.dataset.index;
+            const fb = document.getElementById(`quizFeedback${idx}`);
+            if (fb) { fb.className = 'quiz-feedback'; fb.innerHTML = ''; }
+        });
+        document.getElementById('quizScore').textContent = '';
+    }
+
+    // ============================================
+    // 03 · PLUMA DINÁMICA (Verdadero o Falso)
+    // ============================================
+    const plumaData = [
+        { statement: 'Desplegar a producción un viernes a las 6:00 PM es una excelente práctica recomendada por todos los arquitectos senior.', answer: false, explanation: 'Hacer un deploy un viernes por la tarde es invitar al desastre. Si algo explota, te quedas sin fin de semana arreglando bugs bajo presión. Los deploys se hacen de lunes a miércoles y temprano.' },
+        { statement: 'En la notación Cron de expresiones, el campo correspondiente a los días de la semana usualmente acepta valores numéricos del 0 (domingo) al 6 (sábado).', answer: true, explanation: 'En los cron de Linux o servidores backend, el 0 o 7 representa el domingo, y el 1 al 6 van de lunes a sábado.' },
+        { statement: 'El estándar internacional de zonas horarias UTC debe evitarse por completo en bases de datos distribuidas, siendo mejor guardar siempre la hora local del servidor.', answer: false, explanation: 'En arquitectura moderna de microservicios y pagos globales, guardar todo en UTC es una regla de oro. Si mezclas horas locales, vas a terminar con un caos financiero.' },
+        { statement: 'Las pruebas de estrés y simulación de alta concurrencia suelen programarse preferiblemente en horarios de bajo tráfico real (como madrugadas o fines de semana).', answer: true, explanation: 'Saturar un servidor de pagos con miles de peticiones falsas a las 12:00 PM de un lunes es dispararse en el pie. Siempre se planea en ventanas de mantenimiento.' },
+        { statement: 'En JavaScript, el objeto Date maneja los días de la semana empezando por el lunes como 1 y terminando el domingo como 7 de forma nativa.', answer: false, explanation: 'En JavaScript, el método getDay() devuelve el 0 para el domingo y el 6 para el sábado. Muchos juniors caen en ese garlito.' },
+        { statement: 'Un sistema de mensajería asíncrona (como RabbitMQ o Kafka) garantiza que, sin importar si es lunes o domingo, los mensajes no leídos se queden en la cola hasta que un consumidor los procese.', answer: true, explanation: 'La persistencia de los brokers de mensajes asegura que la data no se pierda por más que sea domingo en la madrugada.' },
+        { statement: 'En metodologías Ágiles (Scrum), las reuniones de Sprint Planning y Retrospective se programan tradicionalmente los viernes por la noche.', answer: false, explanation: 'Esas ceremonias se hacen al inicio o fin de ciclo, pero nunca un viernes por la noche porque la gente está con la cabeza en el descanso.' },
+        { statement: 'El concepto de "Idempotencia" horaria significa que si una tarea programada se dispara dos veces por un error de red, el sistema cobra dos veces al cliente.', answer: false, explanation: 'La idempotencia garantiza que aunque el job o webhook se ejecute múltiples veces, el resultado final en el sistema sea exactamente el mismo: un solo cobro.' },
+        { statement: 'En control de versiones (Git), los commit logs organizados por fecha y hora facilitan enormemente la auditoría de QA para saber qué desarrollador introdujo un bug crítico.', answer: true, explanation: 'Con un buen git blame y la marca temporal, el equipo de QA e ingeniería puede aislar el commit exacto que rompió el backend.' },
+        { statement: 'Las bases de datos relacionales manejan automáticamente el cambio de horario de verano sin alterar las consultas si los campos están configurados como TIMESTAMP WITH TIME ZONE.', answer: true, explanation: 'Usar tipos de datos con zona horaria evita que tus reportes de pagos sufran saltos de una hora cuando los países cambian su horario oficial.' },
+        { statement: 'En los contratos de APIs de pasarelas de pago internacionales, las marcas de tiempo se envían usualmente en formato Epoch Unix para evitar ambigüedades de zona horaria.', answer: true, explanation: 'Un número entero en formato Epoch representa el mismo instante exacto en cualquier lugar del planeta, eliminando dolores de cabeza.' },
+        { statement: 'Las pruebas unitarias de lógica de negocio que dependen de la fecha actual del sistema no necesitan mockear el tiempo y pueden depender directamente de new Date().', answer: false, explanation: 'Si dejas que tus tests dependan de la fecha real, tu prueba fallará automáticamente el fin de semana o cuando corras los tests en un huso horario distinto.' },
+        { statement: 'En el ciclo de vida de desarrollo de software (SDLC), el martes suele considerarse uno de los días más seguros para realizar despliegues a producción.', answer: true, explanation: 'Martes o miércoles son los días predilectos de los devs y QA para salir a producción, ya que todo el escuadrón técnico está operando a full capacidad.' },
+        { statement: 'Un ataque de denegación de servicio (DDoS) a una plataforma de e-commerce suele ocurrir únicamente los domingos a las 3:00 AM.', answer: false, explanation: 'Los ataques y fallas de tráfico masivo ocurren a cualquier hora, especialmente en fechas de alta conversión comercial como el Black Friday o Cyber Monday.' },
+        { statement: 'En arquitectura de microservicios, el desfase de reloj (clock drift) entre servidores virtuales en diferentes regiones puede corromper la secuenciación de eventos en colas de mensajería.', answer: true, explanation: 'Si los servidores no están sincronizados mediante NTP, un evento ocurrido a las 10:00:01 en México podría registrarse con hora posterior en un nodo desfasado.' },
+        { statement: 'Los reportes de liquidación de pasarelas de pago se generan típicamente al cierre del día hábil (End of Day), consolidando todas las transacciones procesadas.', answer: true, explanation: 'El procesamiento por lotes (batch processing) bancario opera bajo cortes temporales estrictos para cuadrar cuentas y transferir los fondos.' },
+        { statement: 'En la gestión de bases de datos, realizar un mantenimiento pesado o VACUUM/reindexación en producción se programa para días y horas de pico máximo de usuarios.', answer: false, explanation: 'Los mantenimientos pesados se programan en ventanas de mantenimiento de madrugada (ej. domingo a las 3:00 AM) para minimizar el impacto en el rendimiento.' },
+        { statement: 'Una prueba de regresión automatizada que toma 4 horas en ejecutarse es ideal para correrse en cada git push individual que hace un desarrollador un lunes por la mañana.', answer: false, explanation: 'Las pruebas E2E o de regresión pesadas se configuran para correr en pipelines nocturnos (nightly builds) o antes de mergear a ramas protegidas.' },
+        { statement: 'El patrón de diseño Circuit Breaker se desactiva automáticamente todos los fines de semana porque el tráfico web disminuye de manera natural.', answer: false, explanation: 'El Circuit Breaker reacciona dinámicamente a las fallas de la red y errores de servicios externos en tiempo real, no por un calendario semanal.' },
+        { statement: 'El uso de contenedores con Docker y orquestadores como Kubernetes ayuda a garantizar que el entorno de ejecución de tu backend sea exactamente el mismo un lunes laborable que un domingo festivo.', answer: true, explanation: 'La contenerización aísla el entorno de la infraestructura subyacente, garantizando consistencia absoluta sin importar la fecha, hora o servidor.' }
+    ];
+
+    let plumaState = plumaData.map(() => ({ answered: false, choice: null }));
+
+    function renderPluma() {
+        const list = document.getElementById('plumaList');
+        let html = '';
+        plumaData.forEach((item, idx) => {
+            html += `<div class="pluma-card" data-index="${idx}">`;
+            html += `<div class="pluma-num">${idx + 1}</div>`;
+            html += `<div class="pluma-statement">${item.statement}</div>`;
+            html += `<div class="pluma-actions">`;
+            html += `<button class="pluma-btn" data-answer="true" onclick="answerPluma(${idx}, true)">Verdadero</button>`;
+            html += `<button class="pluma-btn" data-answer="false" onclick="answerPluma(${idx}, false)">Falso</button>`;
+            html += `</div>`;
+            html += `<div class="pluma-explanation" id="plumaExp${idx}"></div>`;
+            html += `</div>`;
+        });
+        list.innerHTML = html;
+    }
+
+    function answerPluma(idx, choice) {
+        const state = plumaState[idx];
+        if (state.answered) return;
+        state.answered = true;
+        state.choice = choice;
+        const item = plumaData[idx];
+        const isCorrect = (choice === item.answer);
+        const card = document.querySelector(`.pluma-card[data-index="${idx}"]`);
+        const buttons = card.querySelectorAll('.pluma-btn');
+        buttons.forEach(btn => {
+            btn.classList.add('disabled');
+            const btnAnswer = btn.dataset.answer === 'true';
+            if (btnAnswer === item.answer) {
+                btn.classList.add('correct');
+            } else if (btnAnswer === choice && !isCorrect) {
+                btn.classList.add('incorrect');
+            }
+        });
+        const exp = document.getElementById(`plumaExp${idx}`);
+        exp.className = 'pluma-explanation show ' + (isCorrect ? 'ok' : 'no');
+        exp.innerHTML = isCorrect
+            ? `✅ ¡Correcto! ${item.explanation}`
+            : `❌ Incorrecto. La respuesta correcta es <strong>${item.answer ? 'Verdadero' : 'Falso'}</strong>. ${item.explanation}`;
+    }
+
+    // ============================================
+    // 04 · VOCABULARIO Y CULTURA
+    // ============================================
+    const vocabData = [
+        { category: 'Expresión', term: '¿Cachai?', translation: 'Entendeu? / Sacou?', note: 'Chile. Usado para confirmar se o colega entendeu algo.' },
+        { category: 'Expresión', term: 'Quedó la escoba', translation: 'Deu tudo errado / Virou bagunça', note: 'Chile. Quando um script ou query destrói os dados.' },
+        { category: 'Expresión', term: 'Atar con alambre', translation: 'Fazer gambiarra', note: 'Argentina. Solução técnica provisória para um bug urgente.' },
+        { category: 'Expresión', term: 'No le des bola', translation: 'Não preste atenção', note: 'Argentina. Ignorar um endpoint depreciado.' },
+        { category: 'Expresión', term: 'Estar al horno', translation: 'Estar ferrado', note: 'Argentina. Prazo estourando e testes quebrando.' },
+        { category: 'Expresión', term: 'Ponete las pilas', translation: 'Fique esperto / Dedique-se', note: 'Argentina. Focar em otimização de performance.' },
+        { category: 'Expresión', term: 'Bien yeyo', translation: 'De ponta / Chique', note: 'Panamá. Infraestrutura de nuvem robusta e moderna.' },
+        { category: 'Expresión', term: 'Fue un chenchén', translation: 'Foi uma uva / Sem problemas', note: 'Panamá. Deploy que fluiu muito bem.' },
+        { category: 'Expresión', term: 'Se fue a la porra', translation: 'Caiu completamente / Deu crash', note: 'Panamá. Downtime severo do sistema.' },
+        { category: 'Día', term: 'Lunes', translation: 'Segunda-feira', note: 'Início da semana. Día de planificación y dailies.' },
+        { category: 'Día', term: 'Martes', translation: 'Terça-feira', note: 'Día seguro para deploys según SDLC.' },
+        { category: 'Día', term: 'Miércoles', translation: 'Quarta-feira', note: 'También considerado seguro para producción.' },
+        { category: 'Día', term: 'Jueves', translation: 'Quinta-feira', note: 'Aún aceptable para deploys, con precaución.' },
+        { category: 'Día', term: 'Viernes', translation: 'Sexta-feira', note: '¡Nunca hagas deploy un viernes a las 6 PM!' },
+        { category: 'Hora', term: 'Madrugada', translation: 'Madrugada', note: 'Ventana ideal para mantenimiento y stress testing.' },
+        { category: 'Hora', term: 'Hora pico', translation: 'Horário de pico', note: 'Evitar pruebas de carga en este horario.' },
+        { category: 'Hora', term: 'Fin de semana', translation: 'Fim de semana', note: 'Bajo tráfico, ideal para batch processing.' },
+        { category: 'Rutina', term: 'Daily stand-up', translation: 'Reunião diária', note: 'Sincronización matutina del equipo.' },
+        { category: 'Rutina', term: 'Sprint Planning', translation: 'Planejamento da Sprint', note: 'Al inicio del ciclo, nunca un viernes por la noche.' },
+        { category: 'Rutina', term: 'Retrospective', translation: 'Retrospectiva', note: 'Al final del ciclo, en horario hábil.' },
+        { category: 'Rutina', term: 'Code Review', translation: 'Revisão de código', note: 'Momento de elogiar código "harto pije".' },
+        { category: 'Rutina', term: 'Deploy a producción', translation: 'Deploy em produção', note: 'Mejor de martes a miércoles, temprano.' },
+        { category: 'Rutina', term: 'Nightly builds', translation: 'Builds noturnos', note: 'Pruebas pesadas que corren de madrugada.' },
+        { category: 'Rutina', term: 'End of Day', translation: 'Cierre del día hábil', note: 'Corte para reportes de liquidación de pagos.' }
+    ];
+
+    function renderVocab() {
+        const grid = document.getElementById('vocabGrid');
+        let html = '';
+        vocabData.forEach(item => {
+            html += `<div class="vocab-card">`;
+            html += `<span class="vocab-category">${item.category}</span>`;
+            html += `<div class="vocab-term">${item.term}</div>`;
+            html += `<div class="vocab-translation">${item.translation}</div>`;
+            html += `<div class="vocab-note">${item.note}</div>`;
+            html += `</div>`;
+        });
+        grid.innerHTML = html;
+    }
+
+    // ============================================
+    // INIT
+    // ============================================
+    document.addEventListener('DOMContentLoaded', () => {
+        renderFlashcards();
+        renderQuiz();
+        renderPluma();
+        renderVocab();
+    });
+</script>
+
+</body>
+</html>
